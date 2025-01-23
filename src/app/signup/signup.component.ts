@@ -1,11 +1,25 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
+  standalone: true,
   selector: 'app-signup',
-  imports: [],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  styleUrls: ['./signup.component.css'],
+  imports: [CommonModule, FormsModule], // Import FormsModule here
 })
-export class SignupComponent {
 
+export class SignupComponent {
+  username: string = '';
+  password: string = '';
+
+  onSignup() {
+    if (this.username && this.password) {
+      console.log('Signing up with:', this.username, this.password);
+      // Call your backend signup API here
+    } else {
+      alert('Please fill in all fields.');
+    }
+  }
 }

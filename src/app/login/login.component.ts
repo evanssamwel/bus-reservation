@@ -1,28 +1,24 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
+  standalone: true,
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  imports: [CommonModule, FormsModule], // Import FormsModule here
 })
 export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
-
   onLogin() {
-    this.authService.login(this.username, this.password).subscribe(
-      (response) => {
-        // Handle successful login, e.g., store the token
-        this.router.navigate(['/']);
-      },
-      (error) => {
-        // Handle login error
-        console.error(error);
-      }
-    );
+    if (this.username && this.password) {
+      console.log('Logging in with:', this.username, this.password);
+      // Call your backend login API here
+    } else {
+      alert('Please fill in all fields.');
+    }
   }
 }
